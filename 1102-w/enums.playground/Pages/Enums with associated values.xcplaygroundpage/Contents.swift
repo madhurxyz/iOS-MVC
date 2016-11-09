@@ -43,54 +43,39 @@ case .occupied(let person):
  */
 
 class Thing {
-  let name: String
-  
-  init(name: String) {
-    self.name = name
-  }
+    let name: String
+    
+    init(name: String){
+        self.name = name
+    }
 }
 
-enum Box<T> {
-  case empty
-  case contains(T)
+enum Box {
+    case empty
+    case occupied(Thing)
+}
+let newBox = Box.empty
+
+let soccerBall = Thing(name: "soccer ball")
+let phone = Thing(name: "phone")
+let chocolate = Thing(name: "chocolate")
+
+let soccerBox = Box.occupied(soccerBall)
+let phoneBox = Box.occupied(phone)
+let chocolateBox = Box.occupied(chocolate)
+
+func whatsInTheBox(box: Box) -> String {
+    switch box {
+    case .empty: return "The box is \(box)"
+    case .occupied(let thing): return "The box has a \(thing.name)"
+    }
 }
 
-enum Optional<T> {
-  case none
-  case some(T)
-}
+whatsInTheBox(box: newBox)
+whatsInTheBox(box: soccerBox)
+whatsInTheBox(box: phoneBox)
+whatsInTheBox(box: chocolateBox)
 
-
-var emptyBox = Box<String>.empty
-emptyBox = .contains("hello")
-var stringBox = Box<String>.empty
-
-let soccerBall = Thing(name: "Soccer Ball")
-let boxWithSoccerBall = Box.contains(soccerBall)
-
-
-protocol HasName {
-  var name: String {
-    get
-  }
-}
-
-func inTheBox(box: Box<HasName>) -> String {
-  switch box {
-  case .empty:
-    return "box is empty"
-  case .contains(let thing):
-    return "box contains something: ] \(thing.name))"
-  }
-}
-
-
-
-//inTheBox(box: boxWithSoccerBall)
-//inTheBox(box: emptyBox)
-
-let box = Box.contains("hello")
-//inTheBox(box: box)
 
 
 
