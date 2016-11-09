@@ -59,3 +59,29 @@ let subtractionResult = calculator.subtract(a: 2, b: 1)
  2. Create an object of type `Person`. Let it say its name by sending an appropriate message to it.
  3. Create another object of type `Person`. Make it so that both objects _say hello_ to each other by sending appropriate messages.
  */
+//Challenge 1
+class Person {
+    let name: String
+    func sayMyName() -> String{
+        let sayString = "My name is \(name)"
+        print(sayString)
+        return sayString
+    }
+    func greet(person: Person) -> String {
+        let greetString = "Hello \(person.name)!"
+        print(greetString)
+        return greetString
+    }
+    
+    init(name: String){
+        self.name = name
+    }
+}
+//Challenge 2
+let john = Person(name: "John")
+john.sayMyName()
+
+//Challenge 3
+let lisa = Person(name: "Lisa")
+lisa.greet(person: john)
+john.greet(person: lisa)
