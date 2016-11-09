@@ -7,7 +7,7 @@
 //
 
 enum Mood: String {
-  case happy = "😁"
-  case medium = "😑"
-  case angry = "😡"
+    case happy = "😁"
+    case medium = "😑"
+    case angry = "😡"
 }

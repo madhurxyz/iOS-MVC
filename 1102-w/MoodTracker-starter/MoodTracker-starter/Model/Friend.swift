@@ -7,13 +7,11 @@
 //
 
 class Friend {
-  
-  let name: String
-  var mood: Mood
-  
-  init(name: String, mood: Mood){
-    self.name = name
-    self.mood = mood
-  }
-  
+    let name: String
+    let mood: Mood
+    
+    init(name: String, mood: Mood){
+        self.name = name
+        self.mood = mood
+    }
 }
