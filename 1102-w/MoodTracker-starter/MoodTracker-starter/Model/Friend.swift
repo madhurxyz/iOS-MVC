@@ -8,7 +8,7 @@
 
 class Friend {
     let name: String
-    let mood: Mood
+    var mood: Mood
     
     init(name: String, mood: Mood){
         self.name = name

@@ -10,25 +10,34 @@ import UIKit
 
 class FriendsTableViewController: UITableViewController {
     
+    @IBAction func addButton(segue: UIStoryboardSegue) {
+    
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    static let happyString = "Clap along if you feel like a room without a roof"
-    static let mediumString = "We don't give a #$%@"
+    static let happyString = "Clap along if you feel like a room without a roof!"
+    static let mediumString = "I dont %@#$ w/ youuuuuuu!"
     static let angryString = "Why you gotta fight with me at Cheesecake!!!"
-    let friendArray = [
-        Friend(name: "Marq", mood: .angry),
-        Friend(name: "Chandan", mood: .happy),
-        Friend(name: "Corey", mood: .medium),
-        Friend(name: "Jose", mood: .happy),
-        Friend(name: "Sam", mood: .medium),
-        Friend(name: "Nikolas", mood: .angry),
-        Friend(name: "Drake", mood: .angry)
-    ]
+    var friendArray = [Friend]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
-    func updateMood(mood: Mood) {
-        
+    func nextMood(mood: Mood) -> Mood {
+        switch mood {
+        case .happy: return .angry
+        case .medium: return .happy
+        case .angry: return .medium
+        }
+    }
+
+    func updateFriend(friend: Friend, mood: Mood) {
+        friend.mood = mood //update model
+        tableView.reloadData() //update view
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -38,6 +47,10 @@ class FriendsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FriendTableViewCell") as! FriendTableViewCell
         let friend = friendArray[indexPath.row]
+        
+        cell.friend = friend //populate friend in cell with friend in controller
+        cell.friendsTableViewController = self //assign current view controller as the controller
+        
         cell.nameLabel.text = friend.name
         
         switch friend.mood {

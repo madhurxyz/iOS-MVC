@@ -10,7 +10,9 @@ import UIKit
 
 class FriendTableViewCell: UITableViewCell {
     
-
+    var friendsTableViewController: FriendsTableViewController!
+    var friend: Friend!
+    
     @IBOutlet weak var nameLabel: UILabel!
     
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -19,19 +21,9 @@ class FriendTableViewCell: UITableViewCell {
 
     @IBAction func moodButtonPressed(_ sender: Any) {
         
-        switch moodButton.title(for: .normal) {
-        case "😁"?:
-            moodButton.setTitle("😑", for: .normal)
-            descriptionLabel.text = FriendsTableViewController.mediumString
-        case "😑"?:
-            moodButton.setTitle("😡", for: .normal)
-            descriptionLabel.text = FriendsTableViewController.angryString
-        case "😡"?:
-            moodButton.setTitle("😁", for: .normal)
-            descriptionLabel.text = FriendsTableViewController.happyString
-        default: break
-        }
+        let newMood = friendsTableViewController.nextMood(mood: friend.mood) //go to next mood when button tapped
+        friendsTableViewController.updateFriend(friend: friend, mood: newMood) //tell controller + update model/view
+        
         
     }
 }
-
