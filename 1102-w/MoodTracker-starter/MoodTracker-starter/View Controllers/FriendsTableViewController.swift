@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FriendsTableViewController: UITableViewController {
+class FriendsTableViewController: UITableViewController, FriendsTableViewCellDelegate {
     
     @IBAction func addButton(segue: UIStoryboardSegue) {
     
@@ -21,6 +21,11 @@ class FriendsTableViewController: UITableViewController {
     static let happyString = "Clap along if you feel like a room without a roof!"
     static let mediumString = "I dont %@#$ w/ youuuuuuu!"
     static let angryString = "Why you gotta fight with me at Cheesecake!!!"
+    
+//    func addFriend(f: Friend) {
+//        friendArray.append(f)
+//    }
+    
     var friendArray = [Friend]() {
         didSet {
             tableView.reloadData()
@@ -48,8 +53,10 @@ class FriendsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FriendTableViewCell") as! FriendTableViewCell
         let friend = friendArray[indexPath.row]
         
+        //cell.friendsTableViewController = self //assign current view controller as the controller
+
         cell.friend = friend //populate friend in cell with friend in controller
-        cell.friendsTableViewController = self //assign current view controller as the controller
+        cell.delegate = self //assign current TableViewControllerDelegate as the delegate
         
         cell.nameLabel.text = friend.name
         
@@ -67,5 +74,9 @@ class FriendsTableViewController: UITableViewController {
         return cell
     }
     
+    override func unwind(for unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
+        
+    }
+
     
 }

@@ -8,13 +8,20 @@
 
 import UIKit
 
-class TextFieldViewController: UIViewController {
-  
-  @IBOutlet weak var textField: UITextField!
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()    
-  }
-  
-  
+class TextFieldViewController: UIViewController, UITextFieldDelegate {
+    
+    @IBOutlet weak var textField: UITextField!
+    var delegate: UITextFieldDelegate!
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.textField.delegate = self
+    }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        self.textField.text = self.textField.text?.uppercased()
+        print("uppercase: \(self.textField.text!)")
+        return true
+    }
+    
 }

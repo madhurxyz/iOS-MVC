@@ -8,11 +8,15 @@
 
 import UIKit
 
+//protocol AddFriendViewControllerDelegate {
+//    func addFriend(f: Friend)
+//}
+
 class AddFriendViewController: UIViewController {
     
     @IBOutlet weak var friendTextField: UITextField!
     @IBOutlet weak var moodSegmentedControl: UISegmentedControl!
-
+//    var delegate: AddFriendViewControllerDelegate?
 
     var moodStatus: Mood!
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -25,10 +29,10 @@ class AddFriendViewController: UIViewController {
                     case 2: moodStatus = Mood.angry
                     default: break
                 }
-                
                 let friend = Friend(name: friendName!, mood: moodStatus)
-                let friendsTableViewController = segue.destination as! FriendsTableViewController
-                friendsTableViewController.friendArray.append(friend)
+                let destination = segue.destination as! FriendsTableViewController
+                destination.friendArray.append(friend)
+//                self.delegate?.addFriend(f: friend)
             }
         }
         
